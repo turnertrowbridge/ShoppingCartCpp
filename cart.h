@@ -9,19 +9,17 @@
 
 class Cart {
     std::vector<Item> items;
-    std::unordered_map<int, Deal> dealsMap;
     int totalPrice;
     int totalItems;
-    std::vector<Deal> currentDeals;
 
 public:
     Cart();
     void addItem(Item item);
     void removeItem(Item item);
-    void addDeal(Deal deal);
+    std::vector<Item> getCart();
     int getTotalPrice();
     int getTotalItems();
-    void applyDeals();
+    std::unordered_map<int, std::pair<Item, int>> makeItemsMap();
     void checkout();
 };
 

@@ -12,11 +12,11 @@ void Cart::removeItem(Item item) {
     // Remove item from cart
 }
 
-void Cart::addDeal(Deal deal) {
-    currentDeals.push_back(deal);
+std::vector<Item> Cart::getCart() {
+    return items;
 }
 
-void Cart::applyDeals() {
+std::unordered_map<int, std::pair<Item, int>> Cart::makeItemsMap() {
     // Create HashMap to keep track of amount of items
     std::unordered_map<int,std::pair<Item, int>> itemsMap;
 
@@ -29,12 +29,7 @@ void Cart::applyDeals() {
             itemsMap[itemId].second++;
         }
     }
-
-    for (auto& deal : currentDeals) {
-        deal->apply(itemsMap);
-    }
-
-
+    return itemsMap;
 }
 
 void Cart::checkout() {

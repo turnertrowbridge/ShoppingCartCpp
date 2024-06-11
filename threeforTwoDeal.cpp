@@ -3,7 +3,11 @@
 #include "threeForTwoDeal.h"
 #include <iostream>
 
-threeForTwoDeal::threeForTwoDeal(int id) : Deal(id) {}
+threeForTwoDeal::threeForTwoDeal(int id) : id(id) {}
+
+int threeForTwoDeal::getId() {
+    return id;
+}
 
 std::vector<Item> threeForTwoDeal::apply (
     std::unordered_map<int, std::pair<Item, int>>& itemsMap) {
@@ -20,13 +24,6 @@ std::vector<Item> threeForTwoDeal::apply (
             }
         }
     }
-
-
-    // Log discounted items for demonstration
-    for (const auto& item : discounted) {
-        std::cout << "Applied discount to item: " << item.getId() << std::endl;
-    }
-
 
     return discounted;
 }

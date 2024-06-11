@@ -13,10 +13,13 @@ class Item {
     std::set<int> dealIds;
 
 public:
+    Item();
     Item(const std::string&, int id, double price);
+    Item(const std::string& name, int id, double price, const std::set<int>& dealIds);
     void setDealIds(int dealId);
     int getId() const;
-    double getPrice();
+    const std::string& getName() const;
+    double getPrice() const;
     const std::set<int>& getDealIds() const;
 };
 

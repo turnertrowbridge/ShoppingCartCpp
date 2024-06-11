@@ -10,7 +10,6 @@ protected:
     int id;
 
 public:
-    Deal(int id);
     virtual int getId();
     virtual std::vector<Item> apply(std::unordered_map<int, std::pair<Item, int>>& itemsMap) = 0;
 };
