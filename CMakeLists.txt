@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.28)
+project(Catapult)
+
+set(CMAKE_CXX_STANDARD 14)
+
+include_directories(.)
+
+add_executable(Catapult
+        cart.cpp
+        cart.h
+        deal.cpp
+        deal.h
+        item.cpp
+        item.h
+        main.cpp
+        threeforTwoDeal.cpp
+        threeForTwoDeal.h)
