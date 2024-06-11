@@ -1,7 +1,6 @@
 // threeForTwoDeal.cpp
 
 #include "threeForTwoDeal.h"
-#include <iostream>
 
 threeForTwoDeal::threeForTwoDeal(int id) : id(id) {}
 

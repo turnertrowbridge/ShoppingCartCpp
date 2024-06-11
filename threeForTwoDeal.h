@@ -7,7 +7,7 @@
 #include <vector>
 #include <unordered_map>
 
-class threeForTwoDeal {
+class threeForTwoDeal : Deal {
     int id;
 public:
     threeForTwoDeal(int id);

@@ -6,12 +6,11 @@
 #include <vector>
 
 class Deal {
-protected:
     int id;
 
 public:
-    virtual int getId();
-    virtual std::vector<Item> apply(std::unordered_map<int, std::pair<Item, int>>& itemsMap) = 0;
+    int getId();
+    std::vector<Item> apply(std::unordered_map<int, std::pair<Item, int>>& itemsMap);
 };
 
 #endif

@@ -13,6 +13,10 @@ void Item::setDealIds(int dealId) {
     dealIds.insert(dealId);
 }
 
+std::set<int> Item::getDealIds() {
+    return dealIds;
+}
+
 int Item::getId() const {
     return id;
 }
