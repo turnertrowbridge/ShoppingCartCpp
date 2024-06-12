@@ -24,12 +24,12 @@ int main() {
     cart.addItem(apple);
     cart.addItem(apple);
     cart.addItem(apple);
-    cart.addItem(apple);
-    cart.addItem(apple);
     cart.addItem(orange);
     cart.addItem(orange);
+    cart.addItem(apple);
     cart.addItem(orange);
     cart.addItem(banana);
+    cart.addItem(apple);
     cart.addItem(papaya);
 
 
