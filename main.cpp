@@ -15,6 +15,7 @@ int main() {
     Item banana("Banana", 3, 0.20);
     Item papaya("Papaya", 4, 0.50);
     apple.addDeal(deal);
+    orange.addDeal(deal);
 
 
     Cart cart;
@@ -22,6 +23,11 @@ int main() {
     cart.addItem(apple);
     cart.addItem(apple);
     cart.addItem(apple);
+    cart.addItem(apple);
+    cart.addItem(apple);
+    cart.addItem(apple);
+    cart.addItem(orange);
+    cart.addItem(orange);
     cart.addItem(orange);
     cart.addItem(banana);
     cart.addItem(papaya);
