@@ -3,11 +3,11 @@
 #include "threeForTwoDeal.h"
 #include <memory>
 
-threeForTwoDeal::threeForTwoDeal(const std::string &name, int id)
+ThreeForTwoDeal::ThreeForTwoDeal(const std::string &name, int id)
     : Deal(name, id) {}
 
 std::vector<std::shared_ptr<Item>>
-threeForTwoDeal::apply(std::vector<std::shared_ptr<Item>>& items) {
+ThreeForTwoDeal::apply(std::vector<std::shared_ptr<Item>>& items) {
     std::vector<std::shared_ptr<Item>> discounted;
 
     // itemId : (Count, Items[])

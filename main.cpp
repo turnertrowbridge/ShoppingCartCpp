@@ -9,7 +9,7 @@
 #include <iostream>
 
 int main() {
-    auto threeFor2Deal = std::make_shared<threeForTwoDeal>("Three For Two Deal",1);
+    auto threeFor2Deal = std::make_shared<ThreeForTwoDeal>("Three For Two Deal",1);
     auto oneFreeDeal = std::make_shared<BuyThreeOneFreeDeal>("One Free Deal",2);
 
     Item apple("Apple", 1, 0.60);

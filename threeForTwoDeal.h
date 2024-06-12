@@ -7,9 +7,9 @@
 #include <vector>
 #include <unordered_map>
 
-class threeForTwoDeal : public Deal {
+class ThreeForTwoDeal : public Deal {
 public:
-    threeForTwoDeal(const std::string& name, int id);
+    ThreeForTwoDeal(const std::string& name, int id);
 
     std::vector<std::shared_ptr<Item>> apply(std::vector<std::shared_ptr<Item>>& items) override;
 };
