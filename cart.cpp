@@ -77,22 +77,29 @@ void Cart::checkout() {
         std::set<std::shared_ptr<Deal>> itemDeals = item.getDeals();
         // Check all the deals on an item and add item to itemsEligibleForDealMap if it is eligible
         for (const auto& deal : itemDeals){
-            std:: cout << "Deal ID: " << deal->getId() << std::endl;
             int dealId = deal->getId();
-            std::cout << "Deal ID: " << dealId << std::endl;
             if (dealsIdMap.find(dealId) != dealsIdMap.end()) {
-                std::cout << "Found Item: " << item.getName() << std::endl;
                 itemsEligibleForDealMap[dealId].push_back(std::make_pair(item, quantity));
             }
         }
     }
 
+    std::vector<std::vector<Item>> discountedItemsVector;
     // Apply deals
     for (const auto& pair : dealsIdMap) {
         auto deal = pair.second;
         std::vector<Item> discountedItems = deal->apply(itemsEligibleForDealMap[deal->getId()]);
+        discountedItemsVector.push_back(discountedItems);
         for (const Item& item : discountedItems) {
             totalDiscount += item.getPrice();
+        }
+    }
+
+    // Display discounted items
+    std::cout << "Discounted Items: " << std::endl;
+    for (const auto& discountedItems : discountedItemsVector) {
+        for (const Item& item : discountedItems) {
+        std::cout << "   - " << item.getName() << " ~ $" << item.getPrice() << std::endl;
         }
     }
 

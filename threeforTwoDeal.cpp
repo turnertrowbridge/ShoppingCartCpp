@@ -1,7 +1,6 @@
 // threeForTwoDeal.cpp
 
 #include "threeForTwoDeal.h"
-#include <iostream>
 
 threeForTwoDeal::threeForTwoDeal(int id) : id(id) {}
 
@@ -17,11 +16,6 @@ std::vector<Item> threeForTwoDeal::apply (
             discounted.push_back(item);
             itemCount -= 3;
             }
-        }
-
-        std::cout << "Discounted Items: " << std::endl;
-        for (auto &item : discounted) {
-            std::cout << item.getName() << " ~ $" << item.getPrice() << std::endl;
         }
 
     return discounted;
