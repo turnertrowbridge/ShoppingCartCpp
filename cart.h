@@ -4,27 +4,30 @@
 
 #include "item.h"
 #include "deal.h"
+#include <memory>
 #include <vector>
 #include <unordered_map>
 #include <set>
 
 class Cart {
     std::vector<Item> items;
-    int totalPrice;
+    double totalPrice;
     int totalItems;
-    int totalDiscount;
-    std::set<Deal> deals;
-    std::unordered_map<int, Deal> dealIdMap;
-    std::unordered_map<int, std::vector<std::pair<Item, int>>> itemsElgibleForDealMap;
+    double totalDiscount;
+    std::set<std::shared_ptr<Deal>> deals;
+    std::unordered_map<int, std::shared_ptr<Deal>> dealMap;
+    std::unordered_map<int, std::vector<std::pair<Item, int>>>
+        itemsEligibleForDealMap;
+    std::unordered_map<int, std::shared_ptr<Deal>> dealsIdMap;
 public:
     Cart();
     void addItem(Item item);
     void removeItem(Item item);
-    void addDeal(Deal deal);
+    void addDeal(std::shared_ptr<Deal> deal);
     std::vector<Item> getCart();
-    int getTotalPrice();
+    double getTotalPrice();
     int getTotalItems();
-    int getTotalDiscount();
+    double getTotalDiscount();
     std::unordered_map<int, std::pair<Item, int>> makeItemsMap();
     void checkout();
 };

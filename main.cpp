@@ -8,18 +8,24 @@
 #include <iostream>
 
 int main() {
-    Item apple("Apple", 1, 0.60, {1});
-    Item orange("Orange", 2, 0.25, {1});
-    Item banana("Banana", 3, 0.20, {1});
-    Item papaya("Papaya", 4, 0.50, {1});
+    auto deal = std::make_shared<threeForTwoDeal>(1);
+
+    Item apple("Apple", 1, 0.60);
+    Item orange("Orange", 2, 0.25);
+    Item banana("Banana", 3, 0.20);
+    Item papaya("Papaya", 4, 0.50);
+    apple.addDeal(deal);
+
 
     Cart cart;
+    cart.addDeal(deal);
     cart.addItem(apple);
     cart.addItem(apple);
     cart.addItem(apple);
     cart.addItem(orange);
     cart.addItem(banana);
     cart.addItem(papaya);
+
 
     std::cout << "Cart Items: " << std::endl;
 
@@ -32,12 +38,7 @@ int main() {
     threeForTwoDeal deal1(1);
     std::unordered_map<int, std::pair<Item, int>> itemsMap = cart.makeItemsMap();
 
-    std::vector<Item> discountedItems = deal1.apply(itemsMap);
-    std::cout << "Discounted Items: " << std::endl;
-
-    for (auto& item : discountedItems) {
-        std::cout << "   - " << item.getName() << " ~ $" << item.getPrice() << std::endl;
-    }
+    cart.checkout();
 
 
     return 0;

@@ -7,12 +7,12 @@
 #include <vector>
 #include <unordered_map>
 
-class threeForTwoDeal : Deal {
+class threeForTwoDeal : public Deal {
     int id;
 public:
     threeForTwoDeal(int id);
-    int getId();
-    std::vector<Item> apply(std::unordered_map<int, std::pair<Item, int>>& itemsMap);
+    int getId() const override;
+    std::vector<Item> apply(std::vector<std::pair<Item, int>>& itemsMap) override;
 };
 
 #endif

@@ -2,26 +2,28 @@
 #ifndef ITEM_H
 #define ITEM_H
 
+#include "deal.h"
+#include <memory>
+#include <set>
 #include <string>
 #include <vector>
-#include <set>
 
 class Item {
     std::string name;
     int id;
     double price;
-    std::set<int> dealIds;
+    std::set<std::shared_ptr<Deal>> deals;
 
 public:
     Item();
-    Item(const std::string&, int id, double price);
-    Item(const std::string& name, int id, double price, const std::set<int>& dealIds);
-    void setDealIds(int dealId);
-    std::set<int> getDealIds();
+    Item(const std::string &name, int id, double price);
+    Item(const std::string &name, int id, double price,
+         const std::set<std::shared_ptr<Deal>>& deals);
+    void addDeal(std::shared_ptr<Deal> deal);
+    std::set<std::shared_ptr<Deal>> getDeals() const;
     int getId() const;
-    const std::string& getName() const;
+    const std::string &getName() const;
     double getPrice() const;
-    const std::set<int>& getDealIds() const;
 };
 
 #endif

@@ -2,15 +2,17 @@
 #ifndef DEAL_H
 #define DEAL_H
 
-#include "item.h"
 #include <vector>
+
+class Item;
 
 class Deal {
     int id;
 
 public:
-    int getId();
-    std::vector<Item> apply(std::unordered_map<int, std::pair<Item, int>>& itemsMap);
+    virtual ~Deal() = default;
+    virtual int getId() const = 0;
+    virtual std::vector<Item> apply(std::vector<std::pair<Item, int>>& itemsMap) = 0;
 };
 
 #endif

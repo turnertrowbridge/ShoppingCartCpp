@@ -2,7 +2,11 @@
 
 #include "deal.h"
 
-int Deal::getId() { return id; }
 
-
-std::vector<Item> apply(std::unordered_map<int, std::pair<Item, int>>& itemsMap) {};
+int Deal::getId() const {
+    return id;
+}
+std::vector<Item>
+Deal::apply(std::vector<std::pair<Item, int>> &itemsMap) {
+    return {};
+}

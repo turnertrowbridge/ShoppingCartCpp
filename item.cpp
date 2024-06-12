@@ -1,20 +1,23 @@
 // item.cpp
 #include "item.h"
+#include <memory>
+#include <iostream>
 
-Item::Item() : id(0), name(""), price(0.00), dealIds({}) {}
+Item::Item() : id(0), name(""), price(0.00) {}
 
 Item::Item(const std::string& name, int id, double price)
     : name(name), id(id), price(price) {}
 
-Item::Item(const std::string& name, int id, double price, const std::set<int>& dealIds) :
-    name(name), id(id), price(price), dealIds(dealIds) {}
+Item::Item(const std::string& name, int id, double price, const std::set<std::shared_ptr<Deal>>& deals) :
+    name(name), id(id), price(price), deals(deals) {}
 
-void Item::setDealIds(int dealId) {
-    dealIds.insert(dealId);
+void Item::addDeal(std::shared_ptr<Deal> deal) {
+    deals.insert(deal);
+    std::cout << "Deal added to item: " << deal->getId() << std::endl;
 }
 
-std::set<int> Item::getDealIds() {
-    return dealIds;
+std::set<std::shared_ptr<Deal>> Item::getDeals() const{
+    return deals;
 }
 
 int Item::getId() const {
@@ -25,9 +28,6 @@ const std::string& Item::getName() const {
     return name;
 }
 
-const std::set<int>& Item::getDealIds() const {
-    return dealIds;
-}
 double Item::getPrice() const {
     return price;
 }
