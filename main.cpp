@@ -8,7 +8,7 @@
 #include <iostream>
 
 int main() {
-    auto deal = std::make_shared<threeForTwoDeal>(1);
+    auto deal = std::make_shared<threeForTwoDeal>("Three For Two Deal",1);
 
     Item apple("Apple", 1, 0.60);
     Item orange("Orange", 2, 0.25);
@@ -40,9 +40,6 @@ int main() {
     for (auto& item : cart.getCart()) {
         std::cout << item.getName() << " ~ $" << item.getPrice() << std::endl;
     }
-
-    threeForTwoDeal deal1(1);
-    std::unordered_map<int, std::pair<Item, int>> itemsMap = cart.makeItemsMap();
 
     cart.checkout();
 

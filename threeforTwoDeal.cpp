@@ -2,8 +2,7 @@
 
 #include "threeForTwoDeal.h"
 
-threeForTwoDeal::threeForTwoDeal(int id) : id(id) {}
-
+threeForTwoDeal::threeForTwoDeal(const std::string& name, int id) : Deal(name, id) {}
 
 std::vector<Item> threeForTwoDeal::apply (
     std::vector<std::pair<Item, int>>& itemsMap) {
@@ -20,4 +19,3 @@ std::vector<Item> threeForTwoDeal::apply (
 
     return discounted;
 }
-int threeForTwoDeal::getId() const { return id; }

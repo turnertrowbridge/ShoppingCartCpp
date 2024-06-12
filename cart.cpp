@@ -84,12 +84,13 @@ void Cart::checkout() {
         }
     }
 
-    std::vector<std::vector<Item>> discountedItemsVector;
+
+    std::vector<std::pair<std::shared_ptr<Deal>,std::vector<Item>>> discountedItemsVector;  // <Deal, <Item, Quantity>>;
     // Apply deals
     for (const auto& pair : dealsIdMap) {
         auto deal = pair.second;
         std::vector<Item> discountedItems = deal->apply(itemsEligibleForDealMap[deal->getId()]);
-        discountedItemsVector.push_back(discountedItems);
+        discountedItemsVector.emplace_back(deal, discountedItems);
         for (const Item& item : discountedItems) {
             totalDiscount += item.getPrice();
         }
@@ -97,9 +98,12 @@ void Cart::checkout() {
 
     // Display discounted items
     std::cout << "Discounted Items: " << std::endl;
-    for (const auto& discountedItems : discountedItemsVector) {
-        for (const Item& item : discountedItems) {
-        std::cout << "   - " << item.getName() << " ~ $" << item.getPrice() << std::endl;
+    for (const auto& pair: discountedItemsVector) {
+        std::shared_ptr<Deal> deal = pair.first;
+        std::vector<Item> discountedItems = pair.second;
+        std::cout << deal->getName() << ":" << std::endl;
+        for (const auto&  discountItem : discountedItems) {
+            std::cout << "   - " << discountItem.getName() << " ~ $" << discountItem.getPrice() << std::endl;
         }
     }
 

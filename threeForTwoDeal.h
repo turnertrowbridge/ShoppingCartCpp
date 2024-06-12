@@ -8,10 +8,9 @@
 #include <unordered_map>
 
 class threeForTwoDeal : public Deal {
-    int id;
 public:
-    threeForTwoDeal(int id);
-    int getId() const override;
+    threeForTwoDeal(const std::string& name, int id);
+
     std::vector<Item> apply(std::vector<std::pair<Item, int>>& itemsMap) override;
 };
 

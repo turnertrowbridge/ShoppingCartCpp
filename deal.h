@@ -7,12 +7,16 @@
 class Item;
 
 class Deal {
+protected:
+    std::string name;
     int id;
 
 public:
-    virtual ~Deal() = default;
-    virtual int getId() const = 0;
+    Deal(const std::string& name, int id);
+    std::string getName();
+    int getId() const;
     virtual std::vector<Item> apply(std::vector<std::pair<Item, int>>& itemsMap) = 0;
+    virtual ~Deal() = default;
 };
 
 #endif
