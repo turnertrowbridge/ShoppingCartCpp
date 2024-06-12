@@ -8,7 +8,7 @@ CXXFLAGS = -std=c++14 -Wall -g
 INCLUDES = -I.
 
 # Target executable
-TARGET = Catapult
+TARGET = ShoppingCart
 
 # Source files
 SRCS = main.cpp cart.cpp deal.cpp item.cpp threeForTwoDeal.cpp buyThreeOneFreeDeal.cpp
