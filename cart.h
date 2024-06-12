@@ -16,7 +16,7 @@ class Cart {
     double totalDiscount;
     std::set<std::shared_ptr<Deal>> deals;
     std::unordered_map<int, std::shared_ptr<Deal>> dealMap;
-    std::unordered_map<int, std::vector<std::pair<Item, int>>>
+    std::unordered_map<int, std::vector<std::shared_ptr<Item>>>
         itemsEligibleForDealMap;
     std::unordered_map<int, std::shared_ptr<Deal>> dealsIdMap;
 public:

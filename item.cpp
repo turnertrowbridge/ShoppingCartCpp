@@ -2,30 +2,26 @@
 #include "item.h"
 #include <memory>
 
-Item::Item() : id(0), name(""), price(0.00) {}
+Item::Item() : name(""), id(0), price(0.00), dealApplied(false) {}
 
-Item::Item(const std::string& name, int id, double price)
-    : name(name), id(id), price(price) {}
-
-Item::Item(const std::string& name, int id, double price, const std::set<std::shared_ptr<Deal>>& deals) :
-    name(name), id(id), price(price), deals(deals) {}
-
-void Item::addDeal(std::shared_ptr<Deal> deal) {
-    deals.insert(deal);
+Item::Item(const std::string &name, int id, double price)
+    : name(name), id(id), price(price) {
+    dealApplied = false;
 }
 
-std::set<std::shared_ptr<Deal>> Item::getDeals() const{
-    return deals;
+Item::Item(const std::string &name, int id, double price, bool dealApplied,
+           const std::set<std::shared_ptr<Deal>> &deals)
+    : name(name), id(id), price(price), dealApplied(dealApplied), deals(deals) {
 }
 
-int Item::getId() const {
-    return id;
-}
+void Item::addDeal(std::shared_ptr<Deal> deal) { deals.insert(deal); }
 
-const std::string& Item::getName() const {
-    return name;
-}
+void Item::setDealApplied(bool dealApplied) { this->dealApplied = dealApplied; }
 
-double Item::getPrice() const {
-    return price;
-}
+std::set<std::shared_ptr<Deal>> Item::getDeals() const { return deals; }
+
+int Item::getId() const { return id; }
+
+const std::string &Item::getName() const { return name; }
+
+double Item::getPrice() const { return price; }

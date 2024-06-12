@@ -12,7 +12,7 @@ std::string Deal::getName() {
     return name;
 }
 
-std::vector<Item>
-Deal::apply(std::vector<std::pair<Item, int>> &itemsMap) {
+std::vector<std::shared_ptr<Item>>
+Deal::apply(std::vector<std::shared_ptr<Item>>& items) {
     return {};
 }

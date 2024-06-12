@@ -12,18 +12,20 @@ class Item {
     std::string name;
     int id;
     double price;
+    bool dealApplied;
     std::set<std::shared_ptr<Deal>> deals;
 
 public:
     Item();
     Item(const std::string &name, int id, double price);
-    Item(const std::string &name, int id, double price,
+    Item(const std::string &name, int id, double price, bool dealApplied,
          const std::set<std::shared_ptr<Deal>>& deals);
     void addDeal(std::shared_ptr<Deal> deal);
     std::set<std::shared_ptr<Deal>> getDeals() const;
     int getId() const;
     const std::string &getName() const;
     double getPrice() const;
+    void setDealApplied(bool applied);
 };
 
 #endif
