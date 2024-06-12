@@ -13,7 +13,6 @@ ThreeForTwoDeal::apply(std::vector<std::shared_ptr<Item>>& items) {
     // itemId : (Count, Items[])
     std::unordered_map<int, std::pair<int, std::vector<std::shared_ptr<Item>>>> itemsMap;
 
-
     // Add items to HashMap and their quantity
     for (auto &item : items) {
         int itemId = item->getId();
@@ -35,10 +34,18 @@ ThreeForTwoDeal::apply(std::vector<std::shared_ptr<Item>>& items) {
 
         while (itemCount >= 3) {
             auto item = itemsVector.back();
+            // Apply deal and add discounted item to vector
             item->setDealApplied(true);
             itemsVector.pop_back();
-
             discounted.push_back(item);
+
+            // Mark other two items as deal applied
+            itemsVector.back()->setDealApplied(true);
+            itemsVector.pop_back();
+
+            itemsVector.back()->setDealApplied(true);
+            itemsVector.pop_back();
+
             itemCount -= 3;
         }
     }

@@ -32,9 +32,11 @@ BuyThreeOneFreeDeal::apply(std::vector<std::shared_ptr<Item>>& items) {
         itemsDeque.front()->setDealApplied(true);
 
         // Remove the cheapest item from the deque
-        // And the two most expensive items
+        // And mark the two most expensive items and remove them
         itemsDeque.pop_front();
+        itemsDeque.back()->setDealApplied(true);
         itemsDeque.pop_back();
+        itemsDeque.back()->setDealApplied(true);
         itemsDeque.pop_back();
     }
     return discountedItems;
