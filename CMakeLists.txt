@@ -14,4 +14,5 @@ add_executable(Catapult
         item.h
         main.cpp
         threeforTwoDeal.cpp
-        threeForTwoDeal.h)
+        threeForTwoDeal.h
+        buyThreeOneFreeDeal.cpp)

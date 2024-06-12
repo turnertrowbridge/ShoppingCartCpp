@@ -11,7 +11,7 @@ INCLUDES = -I.
 TARGET = Catapult
 
 # Source files
-SRCS = main.cpp cart.cpp deal.cpp item.cpp threeForTwoDeal.cpp
+SRCS = main.cpp cart.cpp deal.cpp item.cpp threeForTwoDeal.cpp buyThreeOneFreeDeal.cpp
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)
