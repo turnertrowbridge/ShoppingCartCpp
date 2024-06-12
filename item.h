@@ -26,6 +26,7 @@ public:
     const std::string &getName() const;
     double getPrice() const;
     void setDealApplied(bool applied);
+    bool getDealApplied() const;
 };
 
 #endif

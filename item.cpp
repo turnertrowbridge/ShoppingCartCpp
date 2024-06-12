@@ -18,6 +18,8 @@ void Item::addDeal(std::shared_ptr<Deal> deal) { deals.insert(deal); }
 
 void Item::setDealApplied(bool dealApplied) { this->dealApplied = dealApplied; }
 
+bool Item::getDealApplied() const { return dealApplied; }
+
 std::set<std::shared_ptr<Deal>> Item::getDeals() const { return deals; }
 
 int Item::getId() const { return id; }

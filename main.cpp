@@ -10,7 +10,7 @@
 
 int main() {
     auto threeFor2Deal = std::make_shared<ThreeForTwoDeal>("Three For Two Deal",1);
-    auto oneFreeDeal = std::make_shared<BuyThreeOneFreeDeal>("One Free Deal",2);
+    auto oneFreeDeal = std::make_shared<BuyThreeOneFreeDeal>("Buy Three One Free Deal",2);
 
     Item apple("Apple", 1, 0.60);
     Item orange("Orange", 2, 0.25);
@@ -26,6 +26,7 @@ int main() {
     cart.addDeal(threeFor2Deal);
     cart.addDeal(oneFreeDeal);
 
+    cart.addItem(apple);
     cart.addItem(apple);
     cart.addItem(apple);
     cart.addItem(apple);

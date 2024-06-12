@@ -19,6 +19,7 @@ class Cart {
     std::unordered_map<int, std::vector<std::shared_ptr<Item>>>
         itemsEligibleForDealMap;
     std::unordered_map<int, std::shared_ptr<Deal>> dealsIdMap;
+    std::vector<std::shared_ptr<Deal>> dealOrder;
 public:
     Cart();
     void addItem(Item item);

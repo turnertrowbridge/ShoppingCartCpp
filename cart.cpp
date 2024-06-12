@@ -33,6 +33,7 @@ double Cart::getTotalDiscount() {
 void Cart::addDeal(std::shared_ptr<Deal> deal) {
     deals.insert(deal);
     dealsIdMap[deal->getId()] = deal;
+    dealOrder.push_back(deal);
 }
 
 std::unordered_map<int, std::pair<Item, int>> Cart::makeItemsMap() {
@@ -90,8 +91,8 @@ void Cart::checkout() {
 
     std::vector<std::pair<std::shared_ptr<Deal>,std::vector<std::shared_ptr<Item>>>> discountedItemsVector;
     // Apply deals
-    for (const auto& pair : dealsIdMap) {
-        auto deal = pair.second;
+    for (const auto& deal : dealOrder) {
+        std::cout << deal->getName() << std::endl;
         std::vector<std::shared_ptr<Item>> discountedItems = deal->apply(itemsEligibleForDealMap[deal->getId()]);
         discountedItemsVector.emplace_back(deal, discountedItems);
         for (const auto& item : discountedItems) {
@@ -103,6 +104,7 @@ void Cart::checkout() {
     std::cout << "Discounted Items: " << std::endl;
     for (const auto& pair: discountedItemsVector) {
         std::shared_ptr<Deal> deal = pair.first;
+        std::cout << deal->getName() << std::endl;
         std::vector<std::shared_ptr<Item>> discountedItems = pair.second;
         std::cout << deal->getName() << ":" << std::endl;
         for (const auto&  discountItem : discountedItems) {
