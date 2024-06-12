@@ -17,6 +17,10 @@ ThreeForTwoDeal::apply(std::vector<std::shared_ptr<Item>>& items) {
     // Add items to HashMap and their quantity
     for (auto &item : items) {
         int itemId = item->getId();
+        // Check if a deal has already been applied
+        if (item->getDealApplied()) {
+            continue;
+        }
         if (itemsMap.find(itemId) == itemsMap.end()) {
             itemsMap[itemId] = std::make_pair(1, std::vector<std::shared_ptr<Item>>{item});
         } else {

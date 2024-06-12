@@ -12,6 +12,10 @@ BuyThreeOneFreeDeal::apply(std::vector<std::shared_ptr<Item>>& items) {
     // Convert vector to deque
     std::deque<std::shared_ptr<Item>> itemsDeque;
     for (auto &item : items) {
+        // Check if a deal has already been applied
+        if (item->getDealApplied()) {
+            continue;
+        }
         itemsDeque.push_back(item);
     }
 
