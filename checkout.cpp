@@ -1,4 +1,5 @@
-#include "Checkout.h"
+// checkout.cpp
+#include "checkout.h"
 #include "deal.h"
 #include <iomanip>
 #include <iostream>
@@ -20,18 +21,22 @@ Checkout::Checkout() {
     Item orange("Orange", 2, 0.25);
     Item banana("Banana", 3, 0.20);
     Item papaya("Papaya", 4, 0.50);
+    
+    // Associate deals with items
     addDealToItem(threeFor2Deal, apple);
     addDealToItem(threeFor2Deal, orange);
     addDealToItem(oneFreeDeal, apple);
     addDealToItem(oneFreeDeal, banana);
 
-    items.push_back(apple);
-    items.push_back(orange);
-    items.push_back(banana);
-    items.push_back(papaya);
+    // Add items to the inventory
+    inventory.push_back(apple);
+    inventory.push_back(orange);
+    inventory.push_back(banana);
+    inventory.push_back(papaya);
 }
 
 void Checkout::setUp() {
+    // Make a new cart
     cart = std::make_shared<Cart>();
     totalPrice = 0;
     totalItems = 0;
@@ -46,9 +51,8 @@ void Checkout::setUp() {
     std::cout << "Deals added to the cart." << std::endl;
 }
 
-std::vector<Item> Checkout::getItems() const { return items; }
-
 int Checkout::getValidIntInput(const std::string &prompt) {
+    // Get valid integer input from the user, otherwise return -1 to go back
     std::cout << prompt;
     int input;
     std::cin >> input;
@@ -62,20 +66,22 @@ int Checkout::getValidIntInput(const std::string &prompt) {
 }
 
 void Checkout::addDealToItem(const std::shared_ptr<Deal>& deal, Item &item) {
+    // Add deal to item and item to deal
     item.addDeal(deal);
     deal->addItemAssociatedName(item.getName());
 }
 
 
-void Checkout::displayItems() const {
-    std::vector<Item> items = getItems();
-    for (int i = 0; i < items.size(); i++) {
-        std::cout << i + 1 << ". " << items[i].getName() << " ~ $"
-                  << items[i].getPrice() << std::endl;
+void Checkout::displayInventory() const {
+    // Display items in inventory
+    for (int i = 0; i < inventory.size(); i++) {
+        std::cout << i + 1 << ". " << inventory[i].getName() << " ~ $"
+                  << inventory[i].getPrice() << std::endl;
     }
 }
 
 void Checkout::displayCart() {
+    // Display items in the cart
     std::vector<Item> items = cart->getCart();
     for (int i = 0; i < items.size(); i++) {
         std::cout << i + 1 << ". " << items[i].getName() << " ~ $"
@@ -84,6 +90,7 @@ void Checkout::displayCart() {
 }
 
 void Checkout::displayDeals() {
+    // Display deals and items associated with them
     for (const auto &deal : deals) {
         std::cout << deal->getName() << std::endl;
         bool hasItems = false;
@@ -91,13 +98,12 @@ void Checkout::displayDeals() {
             std::cout << "  - " << itemName << std::endl;
             hasItems = true;
         }
-
+        
+        // If no deals are available, display a message
         if (!hasItems) {
             std::cout << "    No items available for this deal." << std::endl;
         }
     }
-
-    // Display deals per item
 
     std::cout << "\n\n\nPress any key to continue..." << std::endl;
     std::cin.ignore();
@@ -121,6 +127,7 @@ void Checkout::displayFinalReceipt() {
         }
     }
 
+    // Display discounted items
     if (hasDiscountedItems) {
         std::cout << "\nDiscounts applied:" << std::endl;
         for (const auto &pair : discountedItems) {
@@ -134,6 +141,7 @@ void Checkout::displayFinalReceipt() {
         }
     }
 
+    // Display totals
     std::cout << std::endl;
     std::cout << "Total Price: $" << cart->getTotalPrice() << std::endl;
     std::cout << "Total Items: " << cart->getTotalItems() << std::endl;
@@ -173,14 +181,12 @@ void Checkout::displayCheckout() {
         switch (choice) {
         case 1: {
             // Add item
-
-            // Display items
             std::system("clear");
             std::cout << "Select an item to add to the cart:" << std::endl;
-            displayItems();
+            displayInventory();
             int itemChoice = getValidIntInput("Select an item: ");
-            if (itemChoice > 0 && itemChoice <= items.size()) {
-                cart->addItem(items[itemChoice - 1]);
+            if (itemChoice > 0 && itemChoice <= inventory.size()) {
+                cart->addItem(inventory[itemChoice - 1]);
             }
             break;
         }

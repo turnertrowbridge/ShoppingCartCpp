@@ -14,18 +14,17 @@ class Checkout {
     double totalPrice;
     int totalItems;
     double totalDiscount;
-    std::vector<Item> items;
+    std::vector<Item> inventory;
     std::vector<std::shared_ptr<Deal>> deals;
 
 public:
     Checkout();
     void setUp();
-    std::vector<Item> getItems() const;
 
     static int getValidIntInput(const std::string& prompt);
     static void addDealToItem(const std::shared_ptr<Deal>& deal, Item& item);
 
-    void displayItems() const;
+    void displayInventory() const;
     void displayCart();
     void displayDeals();
     void displayFinalReceipt();
