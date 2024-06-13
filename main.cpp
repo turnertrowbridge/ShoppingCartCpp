@@ -1,6 +1,6 @@
 // main.cpp
 
-#include "Checkout.h"
+#include "checkout.h"
 
 int main() {
     Checkout checkout;
