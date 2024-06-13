@@ -11,7 +11,12 @@ void Cart::addItem(Item item) {
 }
 
 void Cart::removeItem(Item item) {
-    // Remove item from cart
+    for (int i = 0; i < items.size(); i++) {
+        if (items[i].getId() == item.getId()) {
+            items.erase(items.begin() + i);
+            break;
+        }
+    }
 }
 
 std::vector<Item> Cart::getCart() {
@@ -34,6 +39,21 @@ void Cart::addDeal(std::shared_ptr<Deal> deal) {
     deals.insert(deal);
     dealsIdMap[deal->getId()] = deal;
     dealOrder.push_back(deal);
+}
+
+
+std::vector<std::vector<std::pair<std::string, double>>> Cart::getDiscountedItems() {
+    std::vector<std::vector<std::pair<std::string, double>>> discountedItems;
+    for (const auto& pair: discountedItemsVector) {
+        std::shared_ptr<Deal> deal = pair.first;
+        const std::vector<std::shared_ptr<Item>>& discountedItemsVector = pair.second;
+        std::vector<std::pair<std::string, double>> singleItemDiscounts;
+        for (const auto& item : discountedItemsVector) {
+            singleItemDiscounts.push_back(std::make_pair(item->getName(), item->getPrice()));
+        }
+        discountedItems.push_back(singleItemDiscounts);
+    }
+    return discountedItems;
 }
 
 std::unordered_map<int, std::pair<Item, int>> Cart::makeItemsMap() {
@@ -85,7 +105,6 @@ void Cart::checkout() {
     }
 
 
-    std::vector<std::pair<std::shared_ptr<Deal>,std::vector<std::shared_ptr<Item>>>> discountedItemsVector;
     // Apply deals
     for (const auto& deal : dealOrder) {
         std::vector<std::shared_ptr<Item>> discountedItems = deal->apply(itemsEligibleForDealMap[deal->getId()]);
@@ -94,22 +113,4 @@ void Cart::checkout() {
             totalDiscount += item->getPrice();
         }
     }
-
-    // Display discounted items
-    std::cout << "Discounted Items: " << std::endl;
-    for (const auto& pair: discountedItemsVector) {
-        std::shared_ptr<Deal> deal = pair.first;
-        std::vector<std::shared_ptr<Item>> discountedItems = pair.second;
-        std::cout << deal->getName() << ":" << std::endl;
-        for (const auto&  discountItem : discountedItems) {
-            std::cout << "   - " << discountItem->getName() << " ~ $" << discountItem->getPrice() << std::endl;
-        }
-    }
-
-    std::cout << "Total Price: $" << totalPrice << std::endl;
-    std::cout << "Total Items: " << totalItems << std::endl;
-    std::cout << "Total Discount: $" << totalDiscount << std::endl;
-    std::cout << "Final Price: $" << totalPrice - totalDiscount << std::endl;
-
-        
 }

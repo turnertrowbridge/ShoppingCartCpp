@@ -20,6 +20,7 @@ class Cart {
         itemsEligibleForDealMap;
     std::unordered_map<int, std::shared_ptr<Deal>> dealsIdMap;
     std::vector<std::shared_ptr<Deal>> dealOrder;
+    std::vector<std::pair<std::shared_ptr<Deal>,std::vector<std::shared_ptr<Item>>>> discountedItemsVector;
 public:
     Cart();
     void addItem(Item item);
@@ -31,6 +32,7 @@ public:
     double getTotalDiscount();
     std::unordered_map<int, std::pair<Item, int>> makeItemsMap();
     void checkout();
+    std::vector<std::vector<std::pair<std::string, double>>> getDiscountedItems();
 };
 
 #endif
