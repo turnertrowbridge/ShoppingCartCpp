@@ -1,6 +1,6 @@
 // deal.h
-#ifndef DEAL_H
-#define DEAL_H
+#ifndef SHOPPINGCART_DEAL_H
+#define SHOPPINGCART_DEAL_H
 
 #include <memory>
 #include <vector>
@@ -27,4 +27,4 @@ public:
     apply(std::vector<std::shared_ptr<Item>> &items) = 0;
 };
 
-#endif
+#endif // SHOPPINGCART_DEAL_H

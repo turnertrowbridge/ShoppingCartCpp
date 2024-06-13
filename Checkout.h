@@ -1,5 +1,5 @@
-#ifndef CHECKOUT_H
-#define CHECKOUT_H
+#ifndef SHOPPINGCART_CHECKOUT_H
+#define SHOPPINGCART_CHECKOUT_H
 
 #include "buyThreeOneFreeDeal.h"
 #include "threeForTwoDeal.h"
@@ -33,4 +33,4 @@ public:
     void displayMainMenu();
 };
 
-#endif // CHECKOUT_H
+#endif // SHOPPINGCART_CHECKOUT_H

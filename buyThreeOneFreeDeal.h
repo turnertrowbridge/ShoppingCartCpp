@@ -1,7 +1,7 @@
 // buyThreeOneFreeDeal.h
 
-#ifndef BUYTHREEONEFREEDEAL_H
-#define BUYTHREEONEFREEDEAL_H
+#ifndef SHOPPINGCART_BUYTHREEONEFREEDEAL_H
+#define SHOPPINGCART_BUYTHREEONEFREEDEAL_H
 
 #include "deal.h"
 #include "item.h"
@@ -15,4 +15,4 @@ public:
     std::vector<std::shared_ptr<Item>> apply(std::vector<std::shared_ptr<Item>>& items) override;
 };
 
-#endif
+#endif // SHOPPINGCART_BUYTHREEONEFREEDEAL_H

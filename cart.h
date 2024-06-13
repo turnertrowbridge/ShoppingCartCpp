@@ -1,6 +1,6 @@
 // cart.h
-#ifndef CART_H
-#define CART_H
+#ifndef SHOPPINGCART_CART_H
+#define SHOPPINGCART_CART_H
 
 #include "item.h"
 #include "deal.h"
@@ -35,4 +35,4 @@ public:
     void checkout();
 };
 
-#endif
+#endif // SHOPPINGCART_CART_H

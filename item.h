@@ -1,6 +1,6 @@
 // item.h
-#ifndef ITEM_H
-#define ITEM_H
+#ifndef SHOPPINGCART_ITEM_H
+#define SHOPPINGCART_ITEM_H
 
 #include "deal.h"
 #include <memory>
@@ -31,4 +31,4 @@ public:
     void addDeal(std::shared_ptr<Deal> deal);
 };
 
-#endif
+#endif // SHOPPINGCART_ITEM_H
