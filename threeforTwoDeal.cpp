@@ -19,6 +19,8 @@ ThreeForTwoDeal::apply(std::vector<std::shared_ptr<Item>>& items) {
         if (item->getDealApplied()) {
             continue;
         }
+
+        // Add item to map or update count
         if (itemsMap.find(itemId) == itemsMap.end()) {
             itemsMap[itemId] = std::make_pair(1, std::vector<std::shared_ptr<Item>>{item});
         } else {
@@ -27,6 +29,7 @@ ThreeForTwoDeal::apply(std::vector<std::shared_ptr<Item>>& items) {
         }
     }
 
+    // Apply deal to items
     for (auto &entry : itemsMap) {
         int &itemCount = entry.second.first;
         auto itemsVector = entry.second.second;

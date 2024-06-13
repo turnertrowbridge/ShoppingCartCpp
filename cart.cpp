@@ -35,6 +35,7 @@ double Cart::getTotalDiscount() const {
 }
 
 std::vector<std::pair<std::string, std::vector<std::pair<std::string, double>>>> Cart::getDiscountedItems() {
+    // Create a vector of discounted items in form of (dealName, (itemName, itemPrice))
     std::vector<std::pair<std::string, std::vector<std::pair<std::string, double>>>> discountedItems;
     for (const auto& pair: discountedItemsVector) {
         std::shared_ptr<Deal> deal = pair.first;
@@ -78,6 +79,7 @@ void Cart::checkout() {
         itemsEligibleForDealMap[deal->getId()] = std::vector<std::shared_ptr<Item>>();
     }
 
+    // Create a vector of shared pointers to items
     std::vector<std::shared_ptr<Item>> itemsPointerVector;
     for (const Item& item : items) {
         itemsPointerVector.push_back(std::make_shared<Item>(item));
