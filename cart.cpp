@@ -1,7 +1,6 @@
 // cart.cpp
 
 #include "cart.h"
-#include <iostream>
 #include <memory>
 
 Cart::Cart() {}
@@ -10,13 +9,8 @@ void Cart::addItem(Item item) {
     items.push_back(item);
 }
 
-void Cart::removeItem(Item item) {
-    for (int i = 0; i < items.size(); i++) {
-        if (items[i].getId() == item.getId()) {
-            items.erase(items.begin() + i);
-            break;
-        }
-    }
+void Cart::removeItem(int index) {
+    items.erase(items.begin() + index);
 }
 
 std::vector<Item> Cart::getCart() {

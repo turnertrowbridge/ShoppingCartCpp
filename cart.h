@@ -24,7 +24,7 @@ class Cart {
 public:
     Cart();
     void addItem(Item item);
-    void removeItem(Item item);
+    void removeItem(int index);
     void addDeal(std::shared_ptr<Deal> deal);
     std::vector<Item> getCart();
     double getTotalPrice();
