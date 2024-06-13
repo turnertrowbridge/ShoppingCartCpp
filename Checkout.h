@@ -19,16 +19,18 @@ class Checkout {
 
 public:
     Checkout();
+    void setUp();
+    std::vector<Item> getItems() const;
+
+    static int getValidIntInput(const std::string& prompt);
+    static void addDealToItem(const std::shared_ptr<Deal>& deal, Item& item);
+
+    void displayItems() const;
+    void displayCart();
+    void displayDeals();
     void displayFinalReceipt();
     void displayCheckout();
     void displayMainMenu();
-    void displayDeals();
-    std::vector<Item> getItems() const;
-    void displayItems() const;
-    void displayCart();
-    void setUp();
-    void addDealToItem(std::shared_ptr<Deal> deal, Item& item);
-    int getValidIntInput(const std::string& prompt);
 };
 
 #endif // CHECKOUT_H

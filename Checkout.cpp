@@ -46,11 +46,6 @@ void Checkout::setUp() {
     std::cout << "Deals added to the cart." << std::endl;
 }
 
-void Checkout::addDealToItem(std::shared_ptr<Deal> deal, Item &item) {
-    item.addDeal(deal);
-    deal->addItemAssociatedName(item.getName());
-}
-
 std::vector<Item> Checkout::getItems() const { return items; }
 
 int Checkout::getValidIntInput(const std::string &prompt) {
@@ -66,6 +61,12 @@ int Checkout::getValidIntInput(const std::string &prompt) {
     }
 }
 
+void Checkout::addDealToItem(const std::shared_ptr<Deal>& deal, Item &item) {
+    item.addDeal(deal);
+    deal->addItemAssociatedName(item.getName());
+}
+
+
 void Checkout::displayItems() const {
     std::vector<Item> items = getItems();
     for (int i = 0; i < items.size(); i++) {
@@ -80,6 +81,27 @@ void Checkout::displayCart() {
         std::cout << i + 1 << ". " << items[i].getName() << " ~ $"
                   << items[i].getPrice() << std::endl;
     }
+}
+
+void Checkout::displayDeals() {
+    for (const auto &deal : deals) {
+        std::cout << deal->getName() << std::endl;
+        bool hasItems = false;
+        for (const auto &itemName : deal->getItemsAssociatedNames()) {
+            std::cout << "  - " << itemName << std::endl;
+            hasItems = true;
+        }
+
+        if (!hasItems) {
+            std::cout << "    No items available for this deal." << std::endl;
+        }
+    }
+
+    // Display deals per item
+
+    std::cout << "\n\n\nPress any key to continue..." << std::endl;
+    std::cin.ignore();
+    std::cin.get();
 }
 
 void Checkout::displayFinalReceipt() {
@@ -118,27 +140,6 @@ void Checkout::displayFinalReceipt() {
     std::cout << "Total Discount: $" << cart->getTotalDiscount() << std::endl;
     std::cout << "Final Price: $"
               << cart->getTotalPrice() - cart->getTotalDiscount() << std::endl;
-
-    std::cout << "\n\n\nPress any key to continue..." << std::endl;
-    std::cin.ignore();
-    std::cin.get();
-}
-
-void Checkout::displayDeals() {
-    for (const auto &deal : deals) {
-        std::cout << deal->getName() << std::endl;
-        bool hasItems = false;
-        for (const auto &itemName : deal->getItemsAssociatedNames()) {
-            std::cout << "  - " << itemName << std::endl;
-            hasItems = true;
-        }
-
-        if (!hasItems) {
-            std::cout << "    No items available for this deal." << std::endl;
-        }
-    }
-
-    // Display deals per item
 
     std::cout << "\n\n\nPress any key to continue..." << std::endl;
     std::cin.ignore();
