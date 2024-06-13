@@ -25,14 +25,14 @@ public:
     Cart();
     void addItem(Item item);
     void removeItem(int index);
-    void addDeal(std::shared_ptr<Deal> deal);
+    void addDeal(const std::shared_ptr<Deal>& deal);
     std::vector<Item> getCart();
-    double getTotalPrice();
-    int getTotalItems();
-    double getTotalDiscount();
+    double getTotalPrice() const;
+    int getTotalItems() const;
+    double getTotalDiscount() const;
+    std::vector<std::pair<std::string, std::vector<std::pair<std::string, double>>>> getDiscountedItems();
     std::unordered_map<int, std::pair<Item, int>> makeItemsMap();
     void checkout();
-    std::vector<std::pair<std::string, std::vector<std::pair<std::string, double>>>> getDiscountedItems();
 };
 
 #endif

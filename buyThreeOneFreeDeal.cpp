@@ -1,5 +1,5 @@
 // buyThreeOneFreeDeal.cpp
-//
+
 #include "buyThreeOneFreeDeal.h"
 
 BuyThreeOneFreeDeal::BuyThreeOneFreeDeal(const std::string &name, int id)

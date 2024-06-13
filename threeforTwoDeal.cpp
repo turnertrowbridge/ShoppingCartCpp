@@ -1,7 +1,6 @@
 // threeForTwoDeal.cpp
 
 #include "threeForTwoDeal.h"
-#include <memory>
 
 ThreeForTwoDeal::ThreeForTwoDeal(const std::string &name, int id)
     : Deal(name, id) {}

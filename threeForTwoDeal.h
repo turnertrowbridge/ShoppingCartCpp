@@ -4,8 +4,6 @@
 
 #include "deal.h"
 #include "item.h"
-#include <vector>
-#include <unordered_map>
 
 class ThreeForTwoDeal : public Deal {
 public:

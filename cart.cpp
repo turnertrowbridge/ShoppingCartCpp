@@ -1,7 +1,6 @@
 // cart.cpp
 
 #include "cart.h"
-#include <memory>
 
 Cart::Cart() {}
 
@@ -13,28 +12,27 @@ void Cart::removeItem(int index) {
     items.erase(items.begin() + index);
 }
 
-std::vector<Item> Cart::getCart() {
-    return items;
-}
-
-double Cart::getTotalPrice() {
-    return totalPrice;
-}
-
-int Cart::getTotalItems() {
-    return totalItems;
-}
-
-double Cart::getTotalDiscount() {
-    return totalDiscount;
-}
-
-void Cart::addDeal(std::shared_ptr<Deal> deal) {
+void Cart::addDeal(const std::shared_ptr<Deal>& deal) {
     deals.insert(deal);
     dealsIdMap[deal->getId()] = deal;
     dealOrder.push_back(deal);
 }
 
+std::vector<Item> Cart::getCart() {
+    return items;
+}
+
+double Cart::getTotalPrice() const {
+    return totalPrice;
+}
+
+int Cart::getTotalItems() const {
+    return totalItems;
+}
+
+double Cart::getTotalDiscount() const {
+    return totalDiscount;
+}
 
 std::vector<std::pair<std::string, std::vector<std::pair<std::string, double>>>> Cart::getDiscountedItems() {
     std::vector<std::pair<std::string, std::vector<std::pair<std::string, double>>>> discountedItems;
@@ -69,9 +67,7 @@ std::unordered_map<int, std::pair<Item, int>> Cart::makeItemsMap() {
 void Cart::checkout() {
     totalPrice = 0.0;
     totalDiscount = 0.0;
-    // Apply deals and display total info
-
-    // Add undiscounted price of all items
+    // Add normal price of all items
     for (const Item& item : items) {
         totalPrice += item.getPrice();
     }

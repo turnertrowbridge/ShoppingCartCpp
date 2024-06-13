@@ -1,11 +1,10 @@
 // buyThreeOneFreeDeal.h
+
 #ifndef BUYTHREEONEFREEDEAL_H
 #define BUYTHREEONEFREEDEAL_H
 
 #include "deal.h"
 #include "item.h"
-#include <memory>
-#include <vector>
 #include <algorithm>
 #include <deque>
 
