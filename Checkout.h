@@ -10,19 +10,23 @@
 #include <vector>
 
 class Checkout {
-    Cart cart;
+    std::shared_ptr<Cart> cart;
     double totalPrice;
     int totalItems;
     double totalDiscount;
     std::vector<Item> items;
+    std::vector<std::shared_ptr<Deal>> deals;
 
 public:
     Checkout();
     void displayFinalReceipt();
-    void menu();
+    void displayCheckout();
+    void displayMainMenu();
+    void displayDeals();
     std::vector<Item> getItems() const;
-    void displayItems();
+    void displayItems() const;
     void displayCart();
+    void setUp();
 };
 
 #endif // CHECKOUT_H

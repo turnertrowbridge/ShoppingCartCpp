@@ -7,10 +7,14 @@ Checkout::Checkout() {
     totalPrice = 0;
     totalItems = 0;
     totalDiscount = 0;
+
     auto threeFor2Deal =
         std::make_shared<ThreeForTwoDeal>("Three For Two Deal", 1);
     auto oneFreeDeal =
         std::make_shared<BuyThreeOneFreeDeal>("Buy Three One Free Deal", 2);
+
+    deals.push_back(threeFor2Deal);
+    deals.push_back(oneFreeDeal);
     // Add items
     Item apple("Apple", 1, 0.60);
     Item orange("Orange", 2, 0.25);
@@ -25,14 +29,26 @@ Checkout::Checkout() {
     items.push_back(orange);
     items.push_back(banana);
     items.push_back(papaya);
+}
 
-    cart.addDeal(threeFor2Deal);
-    cart.addDeal(oneFreeDeal);
+void Checkout::setUp() {
+    cart = std::make_shared<Cart>();
+    totalPrice = 0;
+    totalItems = 0;
+    totalDiscount = 0;
+    std::cout << "Items added to the checkout." << std::endl;
+
+    // Add deals to cart
+    for (const auto &deal : deals) {
+        cart->addDeal(deal);
+    }
+
+    std::cout << "Deals added to the cart." << std::endl;
 }
 
 std::vector<Item> Checkout::getItems() const { return items; }
 
-void Checkout::displayItems() {
+void Checkout::displayItems() const {
     std::vector<Item> items = getItems();
     for (int i = 0; i < items.size(); i++) {
         std::cout << i + 1 << ". " << items[i].getName() << " ~ $"
@@ -41,7 +57,7 @@ void Checkout::displayItems() {
 }
 
 void Checkout::displayCart() {
-    std::vector<Item> items = cart.getCart();
+    std::vector<Item> items = cart->getCart();
     for (int i = 0; i < items.size(); i++) {
         std::cout << i + 1 << ". " << items[i].getName() << " ~ $"
                   << items[i].getPrice() << std::endl;
@@ -54,22 +70,52 @@ void Checkout::displayFinalReceipt() {
     std::cout << "Items purchased:" << std::endl;
     displayCart();
 
-    std::cout << "\nDiscounted Items:" << std::endl;
-    for (const auto &pair : cart.getDiscountedItems()) {
-        for (const auto &item : pair) {
-            std::cout << "  - " << item.first << " ~ $" << item.second
-                      << std::endl;
+    auto discountedItems = cart->getDiscountedItems();
+    bool hasDiscountedItems = false;
+
+    // Check if there are any discounted items
+    for (const auto &pair : discountedItems) {
+        if (!pair.second.empty()) {
+            hasDiscountedItems = true;
+            break;
         }
     }
+
+    if (hasDiscountedItems) {
+        std::cout << "\nDiscounts applied:" << std::endl;
+        for (const auto &pair : discountedItems) {
+            if (!pair.second.empty()) {
+                std::cout << "\n" << pair.first << std::endl;
+                for (const auto &itemPair : pair.second) {
+                    std::cout << "    - " << itemPair.first << " ~ $"
+                              << itemPair.second << std::endl;
+                }
+            }
+        }
+    }
+
     std::cout << std::endl;
-    std::cout << "Total Price: $" << cart.getTotalPrice() << std::endl;
-    std::cout << "Total Items: " << cart.getTotalItems() << std::endl;
-    std::cout << "Total Discount: $" << cart.getTotalDiscount() << std::endl;
+    std::cout << "Total Price: $" << cart->getTotalPrice() << std::endl;
+    std::cout << "Total Items: " << cart->getTotalItems() << std::endl;
+    std::cout << "Total Discount: $" << cart->getTotalDiscount() << std::endl;
     std::cout << "Final Price: $"
-              << cart.getTotalPrice() - cart.getTotalDiscount() << std::endl;
+              << cart->getTotalPrice() - cart->getTotalDiscount() << std::endl;
+
+    std::cout << "\n\n\nPress any key to continue..." << std::endl;
+    std::cin.ignore();
+    std::cin.get();
 }
 
-void Checkout::menu() {
+void Checkout::displayDeals() {
+    for (const auto &deal : deals) {
+        std::cout << deal->getName() << std::endl;
+    }
+    std::cout << "\n\n\nPress any key to continue..." << std::endl;
+    std::cin.ignore();
+    std::cin.get();
+}
+
+void Checkout::displayCheckout() {
     while (true) {
         // Clear the console
         std::system("clear");
@@ -86,7 +132,8 @@ void Checkout::menu() {
         std::cout << "1. Add Item" << std::endl;
         std::cout << "2. Remove Item" << std::endl;
         std::cout << "3. Checkout" << std::endl;
-        std::cout << "4. Exit" << std::endl;
+        std::cout << "4. Show Deals" << std::endl;
+        std::cout << "5. Exit" << std::endl;
 
         std::cout << "Select an option: ";
         // Wait for user input
@@ -104,7 +151,7 @@ void Checkout::menu() {
             int itemChoice = 0;
             std::cout << "Select an item: ";
             std::cin >> itemChoice;
-            cart.addItem(items[itemChoice - 1]);
+            cart->addItem(items[itemChoice - 1]);
             break;
         }
         case 2: {
@@ -115,16 +162,55 @@ void Checkout::menu() {
             int itemChoice = 0;
             std::cout << "Select an item: ";
             std::cin >> itemChoice;
-            cart.removeItem(items[itemChoice - 1]);
+            cart->removeItem(items[itemChoice - 1]);
             break;
         }
         case 3: {
             // Checkout
-            cart.checkout();
+            cart->checkout();
             displayFinalReceipt();
             return;
         }
         case 4: {
+            // Show deals
+            std::system("clear");
+            std::cout << "Deals:" << std::endl;
+            displayDeals();
+            break;
+        }
+        case 5: {
+            // Exit
+            return;
+        }
+        default: {
+            std::cout << "Invalid choice. Please try again." << std::endl;
+            break;
+        }
+        }
+    }
+}
+
+void Checkout::displayMainMenu() {
+    while (true) {
+        std::system("clear");
+        std::cout << "Welcome to the Checkout" << std::endl;
+        std::cout << "1. Start New Order" << std::endl;
+        std::cout << "2. Exit" << std::endl;
+
+        std::cout << "Select an option: ";
+        int choice;
+        std::cin >> choice;
+
+        switch (choice) {
+        case 1: {
+            // Start new order
+            std::cout << "Starting new order..." << std::endl;
+            std::cout << "Cart created." << std::endl;
+            setUp();
+            displayCheckout();
+            break;
+        }
+        case 2: {
             // Exit
             return;
         }
