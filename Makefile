@@ -11,7 +11,7 @@ INCLUDES = -I.
 TARGET = ShoppingCart
 
 # Source files
-SRCS = main.cpp cart.cpp deal.cpp item.cpp threeForTwoDeal.cpp buyThreeOneFreeDeal.cpp Checkout.cpp
+SRCS = main.cpp cart.cpp deal.cpp item.cpp threeForTwoDeal.cpp buyThreeOneFreeDeal.cpp checkout.cpp
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)
