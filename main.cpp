@@ -11,7 +11,7 @@
 
 int main() {
     Checkout checkout;
-    checkout.menu();
+    checkout.displayMainMenu();
 
     return 0;
 }
