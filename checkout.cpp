@@ -9,14 +9,15 @@ Checkout::Checkout() {
     totalItems = 0;
     totalDiscount = 0;
 
+    // Create deals and add them
     auto threeFor2Deal =
         std::make_shared<ThreeForTwoDeal>("Three For Two Deal", 1);
     auto oneFreeDeal =
         std::make_shared<BuyThreeOneFreeDeal>("Buy Three One Free Deal", 2);
-
     deals.push_back(threeFor2Deal);
     deals.push_back(oneFreeDeal);
-    // Add items
+
+    // Create items
     Item apple("Apple", 1, 0.60);
     Item orange("Orange", 2, 0.25);
     Item banana("Banana", 3, 0.20);
