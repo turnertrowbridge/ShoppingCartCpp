@@ -27,6 +27,8 @@ public:
     void displayItems() const;
     void displayCart();
     void setUp();
+    void addDealToItem(std::shared_ptr<Deal> deal, Item& item);
+    int getValidIntInput(const std::string& prompt);
 };
 
 #endif // CHECKOUT_H

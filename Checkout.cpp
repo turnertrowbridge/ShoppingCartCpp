@@ -20,10 +20,10 @@ Checkout::Checkout() {
     Item orange("Orange", 2, 0.25);
     Item banana("Banana", 3, 0.20);
     Item papaya("Papaya", 4, 0.50);
-    apple.addDeal(threeFor2Deal);
-    orange.addDeal(threeFor2Deal);
-    apple.addDeal(oneFreeDeal);
-    banana.addDeal(oneFreeDeal);
+    addDealToItem(threeFor2Deal, apple);
+    addDealToItem(threeFor2Deal, orange);
+    addDealToItem(oneFreeDeal, apple);
+    addDealToItem(oneFreeDeal, banana);
 
     items.push_back(apple);
     items.push_back(orange);
@@ -46,7 +46,25 @@ void Checkout::setUp() {
     std::cout << "Deals added to the cart." << std::endl;
 }
 
+void Checkout::addDealToItem(std::shared_ptr<Deal> deal, Item &item) {
+    item.addDeal(deal);
+    deal->addItemAssociatedName(item.getName());
+}
+
 std::vector<Item> Checkout::getItems() const { return items; }
+
+int Checkout::getValidIntInput(const std::string &prompt) {
+    std::cout << prompt;
+    int input;
+    std::cin >> input;
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(1000, '\n'); // Clears input buffer if not int
+        return -1;                   // Invalid input
+    } else {
+        return input;
+    }
+}
 
 void Checkout::displayItems() const {
     std::vector<Item> items = getItems();
@@ -85,7 +103,7 @@ void Checkout::displayFinalReceipt() {
         std::cout << "\nDiscounts applied:" << std::endl;
         for (const auto &pair : discountedItems) {
             if (!pair.second.empty()) {
-                std::cout << "\n" << pair.first << std::endl;
+                std::cout << "  " << pair.first << std::endl;
                 for (const auto &itemPair : pair.second) {
                     std::cout << "    - " << itemPair.first << " ~ $"
                               << itemPair.second << std::endl;
@@ -109,7 +127,19 @@ void Checkout::displayFinalReceipt() {
 void Checkout::displayDeals() {
     for (const auto &deal : deals) {
         std::cout << deal->getName() << std::endl;
+        bool hasItems = false;
+        for (const auto &itemName : deal->getItemsAssociatedNames()) {
+            std::cout << "  - " << itemName << std::endl;
+            hasItems = true;
+        }
+
+        if (!hasItems) {
+            std::cout << "    No items available for this deal." << std::endl;
+        }
     }
+
+    // Display deals per item
+
     std::cout << "\n\n\nPress any key to continue..." << std::endl;
     std::cin.ignore();
     std::cin.get();
@@ -136,10 +166,8 @@ void Checkout::displayCheckout() {
         std::cout << "4. Show Deals" << std::endl;
         std::cout << "5. Exit" << std::endl;
 
-        std::cout << "Select an option: ";
         // Wait for user input
-        int choice;
-        std::cin >> choice;
+        int choice = getValidIntInput("Select an option: ");
 
         switch (choice) {
         case 1: {
@@ -149,9 +177,7 @@ void Checkout::displayCheckout() {
             std::system("clear");
             std::cout << "Select an item to add to the cart:" << std::endl;
             displayItems();
-            int itemChoice = 0;
-            std::cout << "Select an item: ";
-            std::cin >> itemChoice;
+            int itemChoice = getValidIntInput("Select an item: ");
             if (itemChoice > 0 && itemChoice <= items.size()) {
                 cart->addItem(items[itemChoice - 1]);
             }
@@ -159,12 +185,10 @@ void Checkout::displayCheckout() {
         }
         case 2: {
             // Remove item
-            std::cout << "Select an item to remove from cart:" << std::endl;
             std::system("clear");
+            std::cout << "Select an item to remove from cart:" << std::endl;
             displayCart();
-            int itemChoice = 0;
-            std::cout << "Select an item: ";
-            std::cin >> itemChoice;
+            int itemChoice = getValidIntInput("Select an item: ");
             if (itemChoice > 0 && itemChoice <= cart->getCart().size()) {
                 cart->removeItem(itemChoice - 1);
             }
@@ -188,7 +212,6 @@ void Checkout::displayCheckout() {
             return;
         }
         default: {
-            std::cout << "Invalid choice. Please try again." << std::endl;
             break;
         }
         }
@@ -203,8 +226,7 @@ void Checkout::displayMainMenu() {
         std::cout << "2. Exit" << std::endl;
 
         std::cout << "Select an option: ";
-        int choice;
-        std::cin >> choice;
+        int choice = getValidIntInput("");
 
         switch (choice) {
         case 1: {
@@ -220,7 +242,6 @@ void Checkout::displayMainMenu() {
             return;
         }
         default: {
-            std::cout << "Invalid choice. Please try again." << std::endl;
             break;
         }
         }
