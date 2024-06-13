@@ -22,7 +22,7 @@ Checkout::Checkout() {
     Item orange("Orange", 2, 0.25);
     Item banana("Banana", 3, 0.20);
     Item papaya("Papaya", 4, 0.50);
-    
+
     // Associate deals with items
     addDealToItem(threeFor2Deal, apple);
     addDealToItem(threeFor2Deal, orange);
@@ -66,12 +66,11 @@ int Checkout::getValidIntInput(const std::string &prompt) {
     }
 }
 
-void Checkout::addDealToItem(const std::shared_ptr<Deal>& deal, Item &item) {
+void Checkout::addDealToItem(const std::shared_ptr<Deal> &deal, Item &item) {
     // Add deal to item and item to deal
     item.addDeal(deal);
     deal->addItemAssociatedName(item.getName());
 }
-
 
 void Checkout::displayInventory() const {
     // Display items in inventory
@@ -99,7 +98,7 @@ void Checkout::displayDeals() {
             std::cout << "  - " << itemName << std::endl;
             hasItems = true;
         }
-        
+
         // If no deals are available, display a message
         if (!hasItems) {
             std::cout << "    No items available for this deal." << std::endl;
@@ -187,7 +186,9 @@ void Checkout::displayCheckout() {
             displayInventory();
             int itemChoice = getValidIntInput("Select an item: ");
             if (itemChoice > 0 && itemChoice <= inventory.size()) {
-                cart->addItem(inventory[itemChoice - 1]);
+                cart->addItem(
+                    inventory[itemChoice - 1]); // Pass item by value to create
+                                                // multiple items
             }
             break;
         }

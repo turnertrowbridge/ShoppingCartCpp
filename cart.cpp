@@ -3,6 +3,7 @@
 
 Cart::Cart() {}
 
+// Pass by value to create multiple items with the same name
 void Cart::addItem(Item item) {
     items.push_back(item);
 }
