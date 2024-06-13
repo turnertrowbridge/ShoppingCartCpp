@@ -1,5 +1,4 @@
 // main.cpp
-
 #include "checkout.h"
 
 int main() {

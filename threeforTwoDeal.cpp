@@ -1,5 +1,4 @@
 // threeForTwoDeal.cpp
-
 #include "threeForTwoDeal.h"
 
 ThreeForTwoDeal::ThreeForTwoDeal(const std::string &name, int id)

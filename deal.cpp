@@ -1,5 +1,4 @@
 // deal.cpp
-
 #include "deal.h"
 
 Deal::Deal(const std::string &name, int id) : name(name), id(id) {}
