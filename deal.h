@@ -11,6 +11,7 @@ class Deal {
 protected:
     std::string name;
     int id;
+    std::vector<std::string> itemsAssociatedNames;
 
 public:
     Deal(const std::string& name, int id);
@@ -18,6 +19,8 @@ public:
     int getId() const;
     virtual std::vector<std::shared_ptr<Item>> apply(std::vector<std::shared_ptr<Item>>& items) = 0;
     virtual ~Deal() = default;
+    void addItemAssociatedName(std::string name);
+    std::vector<std::string> getItemsAssociatedNames();
 };
 
 #endif
