@@ -2,3 +2,4 @@
 ShoppingCart
 *.o
 .clang-format
+CMakeLists.txt
