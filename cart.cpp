@@ -42,8 +42,8 @@ void Cart::addDeal(std::shared_ptr<Deal> deal) {
 }
 
 
-std::vector<std::vector<std::pair<std::string, double>>> Cart::getDiscountedItems() {
-    std::vector<std::vector<std::pair<std::string, double>>> discountedItems;
+std::vector<std::pair<std::string, std::vector<std::pair<std::string, double>>>> Cart::getDiscountedItems() {
+    std::vector<std::pair<std::string, std::vector<std::pair<std::string, double>>>> discountedItems;
     for (const auto& pair: discountedItemsVector) {
         std::shared_ptr<Deal> deal = pair.first;
         const std::vector<std::shared_ptr<Item>>& discountedItemsVector = pair.second;
@@ -51,7 +51,7 @@ std::vector<std::vector<std::pair<std::string, double>>> Cart::getDiscountedItem
         for (const auto& item : discountedItemsVector) {
             singleItemDiscounts.push_back(std::make_pair(item->getName(), item->getPrice()));
         }
-        discountedItems.push_back(singleItemDiscounts);
+        discountedItems.push_back(std::make_pair(deal->getName(), singleItemDiscounts));
     }
     return discountedItems;
 }

@@ -32,7 +32,7 @@ public:
     double getTotalDiscount();
     std::unordered_map<int, std::pair<Item, int>> makeItemsMap();
     void checkout();
-    std::vector<std::vector<std::pair<std::string, double>>> getDiscountedItems();
+    std::vector<std::pair<std::string, std::vector<std::pair<std::string, double>>>> getDiscountedItems();
 };
 
 #endif
