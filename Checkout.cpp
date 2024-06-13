@@ -126,6 +126,7 @@ void Checkout::displayCheckout() {
         // Display items in the cart
         std::cout << "Items in Cart:" << std::endl;
         displayCart();
+        std::cout << std::endl;
 
         // Display the menu
         std::cout << "Menu" << std::endl;
@@ -151,7 +152,9 @@ void Checkout::displayCheckout() {
             int itemChoice = 0;
             std::cout << "Select an item: ";
             std::cin >> itemChoice;
-            cart->addItem(items[itemChoice - 1]);
+            if (itemChoice > 0 && itemChoice <= items.size()) {
+                cart->addItem(items[itemChoice - 1]);
+            }
             break;
         }
         case 2: {
@@ -162,7 +165,9 @@ void Checkout::displayCheckout() {
             int itemChoice = 0;
             std::cout << "Select an item: ";
             std::cin >> itemChoice;
-            cart->removeItem(items[itemChoice - 1]);
+            if (itemChoice > 0 && itemChoice <= cart->getCart().size()) {
+                cart->removeItem(itemChoice - 1);
+            }
             break;
         }
         case 3: {
