@@ -23,10 +23,8 @@ void testAddItem() {
 // Deal applied to 1 orange
 void testApplyDeals1() {
     Cart cart;
-    auto threeFor2Deal =
-        std::make_shared<ThreeForTwoDeal>("Three For Two Deal", 1);
-    auto oneFreeDeal =
-        std::make_shared<BuyThreeOneFreeDeal>("Buy Three One Free Deal", 2);
+    Deal* threeFor2Deal = new ThreeForTwoDeal("Three For Two Deal", 1);
+    Deal* oneFreeDeal = new BuyThreeOneFreeDeal("Buy Three One Free Deal", 2);
 
     Item apple("Apple", 1, 0.60);
     Item orange("Orange", 2, 0.25);
@@ -73,16 +71,17 @@ void testApplyDeals1() {
     std::cout << "\tTotal price is correct!" << std::endl;
     assert(std::fabs(cart.getTotalDiscount() - 0.85) < tolerance);
     std::cout << "\tTotal discount is correct!" << std::endl;
+    
+    delete threeFor2Deal;
+    delete oneFreeDeal;
 }
 
 // Test both deals applied to the same item
 // Expected: Three For Two Deal applied to 1 apple
 void testApplyDeals2() {
     Cart cart;
-    auto threeFor2Deal =
-        std::make_shared<ThreeForTwoDeal>("Three For Two Deal", 1);
-    auto oneFreeDeal =
-        std::make_shared<BuyThreeOneFreeDeal>("Buy Three One Free Deal", 2);
+    Deal* threeFor2Deal = new ThreeForTwoDeal("Three For Two Deal", 1);
+    Deal* oneFreeDeal = new BuyThreeOneFreeDeal("Buy Three One Free Deal", 2);
 
     Item apple("Apple", 1, 0.60);
     Item orange("Orange", 2, 0.25);
@@ -125,16 +124,17 @@ void testApplyDeals2() {
     std::cout << "\tTotal price is correct!" << std::endl;
     assert(std::fabs(cart.getTotalDiscount() - 0.60) < tolerance);
     std::cout << "\tTotal discount is correct!" << std::endl;
+
+    delete threeFor2Deal;
+    delete oneFreeDeal;
 }
 
 // Test Buy Three One Free Deal
 // Expected: Buy Three One Free Deal applied to 1 orange (cheapest)
 void testApplyDeals3() {
     Cart cart;
-    auto threeFor2Deal =
-        std::make_shared<ThreeForTwoDeal>("Three For Two Deal", 1);
-    auto oneFreeDeal =
-        std::make_shared<BuyThreeOneFreeDeal>("Buy Three One Free Deal", 2);
+    Deal* threeFor2Deal = new ThreeForTwoDeal("Three For Two Deal", 1);
+    Deal* oneFreeDeal = new BuyThreeOneFreeDeal("Buy Three One Free Deal", 2);
 
     Item apple("Apple", 1, 0.60);
     Item orange("Orange", 2, 0.25);
@@ -177,6 +177,9 @@ void testApplyDeals3() {
     std::cout << "\tTotal price is correct!" << std::endl;
     assert(std::fabs(cart.getTotalDiscount() - 0.25) < tolerance);
     std::cout << "\tTotal discount is correct!" << std::endl;
+
+    delete threeFor2Deal;
+    delete oneFreeDeal;
 }
 
 // Test Item can be applied to both deals
@@ -184,10 +187,8 @@ void testApplyDeals3() {
 // applied to 1 orange
 void testApplyDeals4() {
     Cart cart;
-    auto threeFor2Deal =
-        std::make_shared<ThreeForTwoDeal>("Three For Two Deal", 1);
-    auto oneFreeDeal =
-        std::make_shared<BuyThreeOneFreeDeal>("Buy Three One Free Deal", 2);
+    Deal* threeFor2Deal = new ThreeForTwoDeal("Three For Two Deal", 1);
+    Deal* oneFreeDeal = new BuyThreeOneFreeDeal("Buy Three One Free Deal", 2);
 
     Item apple("Apple", 1, 0.60);
     Item orange("Orange", 2, 0.25);
@@ -234,6 +235,9 @@ void testApplyDeals4() {
     std::cout << "\tTotal price is correct!" << std::endl;
     assert(std::fabs(cart.getTotalDiscount() - 0.85) < tolerance);
     std::cout << "\tTotal discount is correct!" << std::endl;
+
+    delete threeFor2Deal;
+    delete oneFreeDeal;
 }
 
 int main() {
