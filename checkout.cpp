@@ -83,6 +83,10 @@ void Checkout::displayInventory() const {
 void Checkout::displayCart() {
     // Display items in the cart
     std::vector<Item> items = cart->getCart();
+    if (items.empty()) {
+        std::cout << "Cart is empty." << std::endl;
+        return;
+    }
     for (int i = 0; i < items.size(); i++) {
         std::cout << i + 1 << ". " << items[i].getName() << " ~ $"
                   << items[i].getPrice() << std::endl;
@@ -184,7 +188,7 @@ void Checkout::displayCheckout() {
             std::system("clear");
             std::cout << "Select an item to add to the cart:" << std::endl;
             displayInventory();
-            int itemChoice = getValidIntInput("Select an item: ");
+            int itemChoice = getValidIntInput("Select an item ('b' to go back): ");
             if (itemChoice > 0 && itemChoice <= inventory.size()) {
                 cart->addItem(
                     inventory[itemChoice - 1]); // Pass item by value to create
@@ -197,7 +201,7 @@ void Checkout::displayCheckout() {
             std::system("clear");
             std::cout << "Select an item to remove from cart:" << std::endl;
             displayCart();
-            int itemChoice = getValidIntInput("Select an item: ");
+            int itemChoice = getValidIntInput("Select an item ('b' to go back): ");
             if (itemChoice > 0 && itemChoice <= cart->getCart().size()) {
                 cart->removeItem(itemChoice - 1);
             }
