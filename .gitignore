@@ -3,3 +3,4 @@ ShoppingCart
 *.o
 .clang-format
 CMakeLists.txt
+test_cart
