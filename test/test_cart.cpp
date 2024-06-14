@@ -227,7 +227,7 @@ void testApplyDeals4() {
     assert(
         discountedItemNames ==
         expectedDiscountedItems); // 1 apple and 1 orange should be discounted
-    std::cout << "Testing if both deals with 5 of one item and 1 of another item" << std::endl;
+    std::cout << "Testing if both deals with 5 of one item and 1 of another item..." << std::endl;
     std::cout << "\tCorrect items are discounted!" << std::endl;
     double price = cart.getTotalPrice();
     double tolerance = 1e-9; // Small tolerance for floating-point comparison
