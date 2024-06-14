@@ -11,7 +11,7 @@ class BuyThreeOneFreeDeal : public Deal {
 public:
     BuyThreeOneFreeDeal(const std::string& name, int id);
 
-    std::vector<std::shared_ptr<Item>> apply(std::vector<std::shared_ptr<Item>>& items) override;
+    std::vector<Item*> apply(std::vector<Item*>& items) override;
 };
 
 #endif // SHOPPINGCART_BUYTHREEONEFREEDEAL_H

@@ -13,22 +13,22 @@ class Item {
     int id;
     double price;
     bool dealApplied;
-    std::set<std::shared_ptr<Deal>> deals;
+    std::set<Deal*> deals;
 
 public:
     Item();
     Item(const std::string &name, int id, double price);
     Item(const std::string &name, int id, double price, bool dealApplied,
-         const std::set<std::shared_ptr<Deal>>& deals);
+         const std::set<Deal*>& deals);
 
     const std::string &getName() const;
     int getId() const;
     double getPrice() const;
     bool getDealApplied() const;
-    std::set<std::shared_ptr<Deal>> getDeals() const;
+    std::set<Deal*> getDeals() const;
 
     void setDealApplied(bool applied);
-    void addDeal(std::shared_ptr<Deal> deal);
+    void addDeal(Deal* deal);
 };
 
 #endif // SHOPPINGCART_ITEM_H
