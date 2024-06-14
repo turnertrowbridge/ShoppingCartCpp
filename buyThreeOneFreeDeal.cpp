@@ -4,12 +4,12 @@
 BuyThreeOneFreeDeal::BuyThreeOneFreeDeal(const std::string &name, int id)
     : Deal(name, id) {}
 
-std::vector<std::shared_ptr<Item>>
-BuyThreeOneFreeDeal::apply(std::vector<std::shared_ptr<Item>>& items) {
-    std::vector<std::shared_ptr<Item>> discountedItems;
+std::vector<Item*>
+BuyThreeOneFreeDeal::apply(std::vector<Item*>& items) {
+    std::vector<Item*> discountedItems;
 
     // Convert vector to deque
-    std::deque<std::shared_ptr<Item>> itemsDeque;
+    std::deque<Item*> itemsDeque;
     for (auto &item : items) {
         // Check if a deal has already been applied
         if (item->getDealApplied()) {
@@ -20,7 +20,7 @@ BuyThreeOneFreeDeal::apply(std::vector<std::shared_ptr<Item>>& items) {
 
     // Sort deque
     std::sort(itemsDeque.begin(), itemsDeque.end(),
-              [](const std::shared_ptr<Item>& a, const std::shared_ptr<Item>& b) {
+              [](const Item* a, const Item* b) {
                   return a->getPrice() < b->getPrice();
               });
 
