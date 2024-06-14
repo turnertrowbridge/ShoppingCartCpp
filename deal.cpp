@@ -15,7 +15,7 @@ void Deal::addItemAssociatedName(std::string name) {
     itemsAssociatedNames.push_back(name);
 }
 
-std::vector<std::shared_ptr<Item>>
-Deal::apply(std::vector<std::shared_ptr<Item>> &items) {
+std::vector<Item*>
+Deal::apply(std::vector<Item*> &items) {
     return {};
 }

@@ -9,7 +9,7 @@ Item::Item(const std::string &name, int id, double price)
 }
 
 Item::Item(const std::string &name, int id, double price, bool dealApplied,
-           const std::set<std::shared_ptr<Deal>> &deals)
+           const std::set<Deal*> &deals)
     : name(name), id(id), price(price), dealApplied(dealApplied), deals(deals) {
 }
 
@@ -17,7 +17,7 @@ const std::string &Item::getName() const { return name; }
 int Item::getId() const { return id; }
 double Item::getPrice() const { return price; }
 bool Item::getDealApplied() const { return dealApplied; }
-std::set<std::shared_ptr<Deal>> Item::getDeals() const { return deals; }
+std::set<Deal*> Item::getDeals() const { return deals; }
 
 void Item::setDealApplied(bool dealApplied) { this->dealApplied = dealApplied; }
-void Item::addDeal(std::shared_ptr<Deal> deal) { deals.insert(deal); }
+void Item::addDeal(Deal* deal) { deals.insert(deal); }

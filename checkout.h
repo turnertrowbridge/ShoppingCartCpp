@@ -11,19 +11,20 @@
 #include <vector>
 
 class Checkout {
-    std::shared_ptr<Cart> cart;
+    Cart* cart;
     double totalPrice;
     int totalItems;
     double totalDiscount;
     std::vector<Item> inventory;
-    std::vector<std::shared_ptr<Deal>> deals;
+    std::vector<Deal*> deals;
 
 public:
     Checkout();
+    ~Checkout();
     void setUp();
 
     static int getValidIntInput(const std::string& prompt);
-    static void addDealToItem(const std::shared_ptr<Deal>& deal, Item& item);
+    static void addDealToItem(Deal* deal, Item& item);
 
     void displayInventory() const;
     void displayCart();

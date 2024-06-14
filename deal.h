@@ -23,8 +23,8 @@ public:
 
     void addItemAssociatedName(std::string name);
 
-    virtual std::vector<std::shared_ptr<Item>>
-    apply(std::vector<std::shared_ptr<Item>> &items) = 0;
+    virtual std::vector<Item*>
+    apply(std::vector<Item*> &items) = 0;
 };
 
 #endif // SHOPPINGCART_DEAL_H

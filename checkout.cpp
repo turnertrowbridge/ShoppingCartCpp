@@ -8,12 +8,14 @@ Checkout::Checkout() {
     totalPrice = 0;
     totalItems = 0;
     totalDiscount = 0;
+    this->cart = nullptr;
 
     // Create deals and add them
-    auto threeFor2Deal =
-        std::make_shared<ThreeForTwoDeal>("Three For Two Deal", 1);
-    auto oneFreeDeal =
-        std::make_shared<BuyThreeOneFreeDeal>("Buy Three One Free Deal", 2);
+    ThreeForTwoDeal *threeFor2Deal =
+        new ThreeForTwoDeal("Three For Two Deal", 1);
+    BuyThreeOneFreeDeal *oneFreeDeal =
+        new BuyThreeOneFreeDeal("Buy Three One Free Deal", 2);
+
     deals.push_back(threeFor2Deal);
     deals.push_back(oneFreeDeal);
 
@@ -36,13 +38,26 @@ Checkout::Checkout() {
     inventory.push_back(papaya);
 }
 
+Checkout::~Checkout() {
+    std::cout << "Deleting Checkout" << std::endl;
+    delete cart;
+    for (const auto &deal : deals) {
+        std::cout << "Deleting Deals" << std::endl;
+        delete deal;
+    }
+}
+
 void Checkout::setUp() {
     // Make a new cart
-    cart = std::make_shared<Cart>();
+    if (this->cart != nullptr) {
+        delete this->cart;
+        this->cart = nullptr;
+    }
+    
+    this->cart = new Cart();
     totalPrice = 0;
     totalItems = 0;
     totalDiscount = 0;
-    std::cout << "Items added to the checkout." << std::endl;
 
     // Add deals to cart
     for (const auto &deal : deals) {
@@ -66,7 +81,7 @@ int Checkout::getValidIntInput(const std::string &prompt) {
     }
 }
 
-void Checkout::addDealToItem(const std::shared_ptr<Deal> &deal, Item &item) {
+void Checkout::addDealToItem(Deal *deal, Item &item) {
     // Add deal to item and item to deal
     item.addDeal(deal);
     deal->addItemAssociatedName(item.getName());
@@ -188,7 +203,8 @@ void Checkout::displayCheckout() {
             std::system("clear");
             std::cout << "Select an item to add to the cart:" << std::endl;
             displayInventory();
-            int itemChoice = getValidIntInput("Select an item ('b' to go back): ");
+            int itemChoice =
+                getValidIntInput("Select an item ('b' to go back): ");
             if (itemChoice > 0 && itemChoice <= inventory.size()) {
                 cart->addItem(
                     inventory[itemChoice - 1]); // Pass item by value to create
@@ -201,7 +217,8 @@ void Checkout::displayCheckout() {
             std::system("clear");
             std::cout << "Select an item to remove from cart:" << std::endl;
             displayCart();
-            int itemChoice = getValidIntInput("Select an item ('b' to go back): ");
+            int itemChoice =
+                getValidIntInput("Select an item ('b' to go back): ");
             if (itemChoice > 0 && itemChoice <= cart->getCart().size()) {
                 cart->removeItem(itemChoice - 1);
             }

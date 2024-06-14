@@ -4,12 +4,12 @@
 ThreeForTwoDeal::ThreeForTwoDeal(const std::string &name, int id)
     : Deal(name, id) {}
 
-std::vector<std::shared_ptr<Item>>
-ThreeForTwoDeal::apply(std::vector<std::shared_ptr<Item>>& items) {
-    std::vector<std::shared_ptr<Item>> discounted;
+std::vector<Item*>
+ThreeForTwoDeal::apply(std::vector<Item*>& items) {
+    std::vector<Item*> discounted;
 
     // itemId : (Count, Items[])
-    std::unordered_map<int, std::pair<int, std::vector<std::shared_ptr<Item>>>> itemsMap;
+    std::unordered_map<int, std::pair<int, std::vector<Item*>>> itemsMap;
 
     // Add items to HashMap and their quantity
     for (auto &item : items) {
@@ -21,7 +21,7 @@ ThreeForTwoDeal::apply(std::vector<std::shared_ptr<Item>>& items) {
 
         // Add item to map or update count
         if (itemsMap.find(itemId) == itemsMap.end()) {
-            itemsMap[itemId] = std::make_pair(1, std::vector<std::shared_ptr<Item>>{item});
+            itemsMap[itemId] = std::make_pair(1, std::vector<Item*>{item});
         } else {
             itemsMap[itemId].first++;
             itemsMap[itemId].second.push_back(item);

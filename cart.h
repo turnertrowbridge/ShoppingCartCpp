@@ -14,18 +14,20 @@ class Cart {
     double totalPrice;
     int totalItems;
     double totalDiscount;
-    std::set<std::shared_ptr<Deal>> deals;
-    std::unordered_map<int, std::shared_ptr<Deal>> dealMap;
-    std::unordered_map<int, std::vector<std::shared_ptr<Item>>>
+    std::set<Deal*> deals;
+    std::unordered_map<int, Deal*> dealMap;
+    std::unordered_map<int, std::vector<Item*>>
         itemsEligibleForDealMap;
-    std::unordered_map<int, std::shared_ptr<Deal>> dealsIdMap;
-    std::vector<std::shared_ptr<Deal>> dealOrder;
-    std::vector<std::pair<std::shared_ptr<Deal>,std::vector<std::shared_ptr<Item>>>> discountedItemsVector;
+    std::unordered_map<int, Deal*> dealsIdMap;
+    std::vector<Deal*> dealOrder;
+    std::vector<std::pair<Deal*, std::vector<Item*>>> discountedItemsVector;
+    std::vector<Item*> itemsPointerVector;
 public:
     Cart();
+    ~Cart();
     void addItem(Item item);
     void removeItem(int index);
-    void addDeal(const std::shared_ptr<Deal>& deal);
+    void addDeal(Deal* deal);
     std::vector<Item> getCart();
     double getTotalPrice() const;
     int getTotalItems() const;
