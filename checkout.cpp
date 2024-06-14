@@ -39,10 +39,8 @@ Checkout::Checkout() {
 }
 
 Checkout::~Checkout() {
-    std::cout << "Deleting Checkout" << std::endl;
     delete cart;
     for (const auto &deal : deals) {
-        std::cout << "Deleting Deals" << std::endl;
         delete deal;
     }
 }
@@ -63,8 +61,6 @@ void Checkout::setUp() {
     for (const auto &deal : deals) {
         cart->addDeal(deal);
     }
-
-    std::cout << "Deals added to the cart." << std::endl;
 }
 
 int Checkout::getValidIntInput(const std::string &prompt) {
